@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aryan — Creative Developer
 
-## Getting Started
+A responsive, monochrome portfolio landing page built with Next.js App Router. It features animated line art, a warped grid, ticker strips, a contact form, and a synthesized playable piano keyboard.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+On Windows, copy `.env.example` to `.env.local` with File Explorer or:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```powershell
+Copy-Item .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Fill in the MongoDB and SMTP values described below before testing contact submissions. Never commit `.env.local`.
 
-## Learn More
+## Contact form configuration
 
-To learn more about Next.js, take a look at the following resources:
+The `POST /api/contact` route stores submissions in the MongoDB `contacts` collection and sends a confirmation email and a notification email using SMTP. Configure these environment variables in `.env.local` for development and in the Vercel project settings for deployment:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Purpose |
+| --- | --- |
+| `MONGODB_URI` | MongoDB connection string |
+| `MONGODB_DB` | Database name (defaults to `portfolio`) |
+| `SMTP_HOST` | SMTP server hostname |
+| `SMTP_PORT` | SMTP port (defaults to `587`) |
+| `SMTP_USER` | SMTP username |
+| `SMTP_PASS` | SMTP password or app password |
+| `SMTP_FROM` | Verified sender address |
+| `CONTACT_EMAIL` | Inbox for portfolio contact notifications |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The form displays an explicit configuration error when these values are missing; no credentials are included in source.
 
-## Deploy on Vercel
+## Validate and build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run lint
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Import this repository into Vercel, then add the contact form environment variables in **Project Settings → Environment Variables** before deploying.
