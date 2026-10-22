@@ -1,4 +1,4 @@
-# Aryan — Creative Developer
+# Web — Creative Developer
 
 A responsive, monochrome portfolio landing page built with Next.js App Router. It features animated line art, a warped grid, ticker strips, a contact form, and a synthesized playable piano keyboard.
 
